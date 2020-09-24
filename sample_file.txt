@@ -1,0 +1,17 @@
+Function TAB_MOVE(ByRef USE_TAB As Boolean)
+Dim intSTART As Integer, intLENGTH As Integer, txtNEW As String
+    intSTART = RTF.SelStart     '// REMEMBER THE START POS OF CARRET
+    txtORIGINAL = RTF.SelText
+    txtNEW = ""
+    SPL_TXT = Split(RTF.SelText, vbCrLf)
+        For I = 0 To UBound(SPL_TXT)    '// ADD SPACE BEFORE EACH LINE
+            If Not I = UBound(SPL_TXT) Then
+                txtNEW = txtNEW & Space(5) & SPL_TXT(I) & vbCrLf
+            Else
+                txtNEW = txtNEW & Space(5) & SPL_TXT(I) '// DON'T ADD LINE BREAK ON LAST LINE
+            End If
+        Next I
+    RTF.SelText = txtNEW
+    RTF.SelStart = intSTART
+    RTF.SelLength = Len(txtNEW)
+End Function
